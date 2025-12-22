@@ -5,6 +5,7 @@ import { MyAdventurers } from './pages/MyAdventurers';
 import { NewAdventurer } from './pages/NewAdventurer';
 import { EditAdventurer } from './pages/EditAdventurer';
 import { DeleteConfirmation } from './pages/DeleteConfirmation';
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -12,10 +13,30 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/characters" element={<MyAdventurers />} />
-        <Route path="/characters/new" element={<NewAdventurer />} />
-        <Route path="/characters/:id/edit" element={<EditAdventurer />} />
-        <Route path="/characters/:id/delete" element={<DeleteConfirmation />} />
+        
+        <Route path="/characters" element={
+          <ProtectedRoute>
+            <MyAdventurers />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/characters/new" element={
+          <ProtectedRoute>
+            <NewAdventurer />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/characters/:id/edit" element={
+          <ProtectedRoute>
+            <EditAdventurer />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/characters/:id/delete" element={
+          <ProtectedRoute>
+            <DeleteConfirmation />
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );

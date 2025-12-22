@@ -49,37 +49,37 @@ export const login = async (username, password) => {
 
 // Characters API calls
 export const getCharacterTypes = async () => {
-  apiRequest("/charactertypes");
+  return apiRequest("/charactertypes");
 };
 
 export const getTraits = async () => {
-  apiRequest("/traits");
+  return apiRequest("/traits");
 };
 
 export const getCharacters = async () => {
-  apiRequest("/characters");
+  return apiRequest("/characters");
 };
 
 export const getCharacter = async (id) => {
-  apiRequest(`/characters/${id}`);
+  return apiRequest(`/characters/${id}`);
 };
 
 export const createCharacter = async (characterData) => {
-  apiRequest("/characters", {
+  return apiRequest("/characters", {
     method: "POST",
     body: JSON.stringify(characterData),
   });
 };
 
 export const updateCharacter = async (id, characterData) => {
-  apiRequest(`/characters/${id}`, {
+  return apiRequest(`/characters/${id}`, {
     method: "PUT",
     body: JSON.stringify(characterData),
   });
 };
 
 export const deleteCharacter = async (id) => {
-  apiRequest(`/characters/${id}`, {
+  return apiRequest(`/characters/${id}`, {
     method: "DELETE",
   });
 };

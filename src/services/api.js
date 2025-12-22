@@ -29,6 +29,10 @@ export const apiRequest = async (endpoint, options = {}) => {
     throw new Error(error.error || "Something went wrong");
   }
 
+  if (response.status === 204) {
+    return null;
+  }
+
   return response.json();
 };
 

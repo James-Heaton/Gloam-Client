@@ -6,10 +6,16 @@ import { NewAdventurer } from './pages/NewAdventurer';
 import { EditAdventurer } from './pages/EditAdventurer';
 import { DeleteConfirmation } from './pages/DeleteConfirmation';
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Navbar } from './components/Navbar';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 
 const App = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+  
   return (
     <BrowserRouter>
+      {isAuthenticated && <Navbar />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />

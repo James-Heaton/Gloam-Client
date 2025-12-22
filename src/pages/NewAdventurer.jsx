@@ -61,7 +61,7 @@ export const NewAdventurer = () => {
     }
 
     if (selectedTraits.length !== 2) {
-      setError('Thou shalt select exactly 2 traits. No more. No less. 2 shall be the number of traits thou shalt select, and the number of traits selected shall be 2. 3 traits shalt thou not select, neither select thou 1, except that thou then proceed to 2. 4 is RIGHT OUT.');
+      setError('Please select exactly 2 traits');
       return;
     }
 
@@ -122,7 +122,7 @@ export const NewAdventurer = () => {
         </div>
 
         <div>
-          <label>Traits (select exactly 2):</label>
+          <label>Traits (pick 2):</label>
           {traits.map((trait) => (
             <div key={trait.id}>
               <input

@@ -25,11 +25,6 @@ export const MyAdventurers = () => {
     fetchCharacters();
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -38,8 +33,6 @@ export const MyAdventurers = () => {
     <div>
       <h1>My Adventurers</h1>
       <p>Welcome, {user?.username}!</p>
-      
-      <button onClick={handleLogout}>Logout</button>
       
       <Link to="/characters/new">
         <button>Create New Adventurer</button>

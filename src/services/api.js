@@ -87,3 +87,33 @@ export const deleteCharacter = async (id) => {
     method: "DELETE",
   });
 };
+
+// Game API calls
+export const getGameState = async () => {
+  return apiRequest("/game/state");
+};
+
+export const executeAction = async (actionId, useStealthy = false) => {
+  return apiRequest("/game/action", {
+    method: "POST",
+    body: JSON.stringify({
+      action_id: actionId,
+      use_stealthy: useStealthy,
+    }),
+  });
+};
+
+export const resetGame = async (characterId) => {
+  return apiRequest("/game/reset", {
+    method: "POST",
+    body: JSON.stringify({
+      character_id: characterId,
+    }),
+  });
+};
+
+export const setActiveCharacter = async (characterId) => {
+  return apiRequest(`/characters/${characterId}/set-active`, {
+    method: "POST",
+  });
+};

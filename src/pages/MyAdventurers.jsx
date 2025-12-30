@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { getCharacters } from '../services/api';
+import { getCharacters, setActiveCharacter, resetGame } from '../services/api';
 
 export const MyAdventurers = () => {
   const { user, logout } = useContext(AuthContext);
@@ -25,6 +25,25 @@ export const MyAdventurers = () => {
     fetchCharacters();
   }, []);
 
+  const handlePlayGame = async (characterId) => {
+    try {
+      await setActiveCharacter(characterId);
+      navigate('/game');
+    } catch (err) {
+      setError(err.message || 'Failed to set active character');
+    }
+  };
+
+  const handleNewGame = async (characterId) => {
+    try {
+      await setActiveCharacter(characterId);
+      await resetGame(characterId);
+      navigate('/game');
+    } catch (err) {
+      setError(err.message || 'Failed to start new game');
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -34,10 +53,6 @@ export const MyAdventurers = () => {
       <h1>My Adventurers</h1>
       <p>Welcome, {user?.username}!</p>
       
-      <Link to="/characters/new">
-        <button>Create New Adventurer</button>
-      </Link>
-
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
       {characters.length === 0 ? (
@@ -49,21 +64,33 @@ export const MyAdventurers = () => {
               <h3>{character.name}</h3>
               <p>Type: {character.character_type_name}</p>
               <p>HP: {character.hp}/{character.max_hp} | MP: {character.mp}/{character.max_mp}</p>
+              <p>Area: {character.current_area} | Gold: {character.gp} GP</p>
               <p>
                 Traits: {character.traits.map(t => t.name).join(', ')}
               </p>
+
+              <div style={{ marginTop: '10px', display: 'flex', gap: '10px' }}>
+                <button onClick={() => handleNewGame(character.id)}>New Game</button>
+                
+                {character.current_area > 1 && (
+                  <button onClick={() => handlePlayGame(character.id)}>Continue Game</button>
+                )}
               
-              <Link to={`/characters/${character.id}/edit`}>
-                <button>Edit</button>
-              </Link>
-              
-              <Link to={`/characters/${character.id}/delete`}>
-                <button>Delete</button>
-              </Link>
+                <Link to={`/characters/${character.id}/edit`}>
+                  <button>Edit</button>
+                </Link>
+                
+                <Link to={`/characters/${character.id}/delete`}>
+                  <button>Delete</button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
       )}
+      <Link to="/characters/new">
+      <button>Create New Adventurer</button>
+      </Link>
     </div>
   );
 };

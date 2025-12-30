@@ -46,10 +46,11 @@ export const Register = () => {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>Gloam: The Winding Path</h1>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username </label>
           <input
             id="username"
             type="text"
@@ -60,7 +61,7 @@ export const Register = () => {
         </div>
 
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password </label>
           <input
             id="password"
             type="password"
@@ -71,7 +72,7 @@ export const Register = () => {
         </div>
 
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password </label>
           <input
             id="confirmPassword"
             type="password"
@@ -84,12 +85,12 @@ export const Register = () => {
         {error && <div style={{ color: 'red' }}>{error}</div>}
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Submitting...' : 'Submit'}
+          {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
 
       <p>
-        Already have an account? <Link to="/">Sign in here</Link>
+        Already have an account? <Link to="/">Sign In</Link>
       </p>
     </div>
   );

@@ -9,6 +9,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Navbar } from './components/Navbar';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import GamePage from './components/game/GamePage';
+import { GameProvider } from './context/GameProvider';
 
 const App = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -41,6 +43,14 @@ const App = () => {
         <Route path="/characters/:id/delete" element={
           <ProtectedRoute>
             <DeleteConfirmation />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/game" element={
+          <ProtectedRoute>
+            <GameProvider>
+              <GamePage />
+            </GameProvider>
           </ProtectedRoute>
         } />
       </Routes>

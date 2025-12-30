@@ -34,10 +34,11 @@ export const Login = () => {
 
   return (
     <div>
-      <h1>Sign In</h1>
+      <h1>Gloam: The Winding Path</h1>
+      <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username</label>
+          <label>Username </label>
           <input
             id="username"
             type="text"
@@ -47,7 +48,7 @@ export const Login = () => {
           />
         </div>
         <div>
-          <label>Password</label>
+          <label>Password </label>
           <input
             id="password"
             type="password"
@@ -64,7 +65,7 @@ export const Login = () => {
         </button>
 
         <p>
-        First Adventure? <Link to="/register">Sign Up</Link>
+        First adventure? <Link to="/register">Sign Up</Link>
         </p>
       </form>
     </div>

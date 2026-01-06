@@ -31,7 +31,7 @@ export default function GameOverModal() {
         {isVictory ? (
           <div>
             <p className="text-gray-300 mb-4">
-              Congratulations! You survived Gloam: The Winding Path. The castle holds many secrets and paths you have not yet discovered. Will you dare to walk The Winding Path again?
+              Congratulations! You survived Gloam: The Winding Path. The castle holds many secrets and paths you have not yet discovered. Do you dare to walk The Winding Path again?
             </p>
             <p className="text-yellow-400 text-xl mb-6">
               Final Gold: {finalGP} GP

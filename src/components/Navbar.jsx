@@ -18,14 +18,13 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-black py-4 shadow-xl/60 ">
+    <nav className="fixed top-0 z-50 bg-black py-4 shadow-xl/60 w-full">
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center relative">
         {/* App Name */}
-        <Link 
-          to="/landing"
-          className="font-washington hover:text-red-800 no-underline text-5xl transition-colors duration-400 text-stone-300">
+        <div
+          className="font-washington text-4xl text-stone-300">
           Gloam
-        </Link>
+        </div>
 
         {/* Burger Icon */}
         <button

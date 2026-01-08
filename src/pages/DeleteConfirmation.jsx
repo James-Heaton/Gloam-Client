@@ -40,45 +40,88 @@ export const DeleteConfirmation = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="font-washington text-3xl text-stone-300">Loading...</div>
+      </div>
+    );
   }
 
   if (!character) {
-    return <div>Character not found</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="font-washington text-3xl text-red-500">Character not found</div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Delete Adventurer</h1>
-      
-      <div style={{ backgroundColor: '#f8d7da', padding: '20px', marginBottom: '20px', border: '1px solid #f5c6cb' }}>
-        <h2>Are you sure you want to delete</h2>
-        <h1>{character.name}</h1>
+    <div className="animate-fadeIn flex justify-center items-start pt-40 pb-8 px-4 min-h-screen">
+      <div className="w-full max-w-2xl">
+        <h1 className="font-washington text-5xl font-bold text-center text-stone-300 mb-8">
+          Delete Adventurer
+        </h1>
         
-        <div style={{ backgroundColor: 'white', padding: '15px', margin: '10px 0' }}>
-          <p><strong>Type:</strong> {character.character_type_name}</p>
-          <p><strong>HP:</strong> {character.hp}/{character.max_hp} | <strong>MP:</strong> {character.mp}/{character.max_mp}</p>
-          <p><strong>Traits:</strong> {character.traits.map(t => t.name).join(', ')}</p>
+        {/* Warning Box */}
+        <div className="bg-red-900/30 border-4 border-red-800 rounded-lg p-8 mb-6 ml-6 mr-6">
+          <h2 className="font-washington text-3xl text-red-300 text-center mb-4">
+            Are you sure you want to delete
+          </h2>
+          <h3 className="font-washington text-5xl font-bold text-center text-stone-100 mb-6">
+            {character.name}?
+          </h3>
+          
+          {/* Character Details */}
+          <div className="bg-black/60 border-2 border-stone-700 rounded p-6 mb-6 space-y-3">
+            <p className="text-stone-300 text-lg">
+              <span className="text-stone-400">Type:</span> {character.character_type_name}
+            </p>
+            <p className="text-stone-300 text-lg">
+              <span className="text-stone-400">HP:</span> {character.hp}/{character.max_hp}
+              <span className="mx-3">|</span>
+              <span className="text-stone-400">MP:</span> {character.mp}/{character.max_mp}
+            </p>
+            <p className="text-stone-300 text-lg">
+              <span className="text-stone-400">Traits:</span> {character.traits.map(t => t.name).join(', ')}
+            </p>
+          </div>
+          
+          <p className="font-washington text-2xl text-red-400 text-center font-bold">
+            ⚠️ This action cannot be undone!
+          </p>
         </div>
-        
-        <p><strong>This action cannot be undone!</strong></p>
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-900/50 text-red-100 px-4 py-3 border-2 border-red-900 rounded text-center mb-6">
+            {error}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex gap-4">
+          <button 
+            onClick={handleDelete} 
+            disabled={deleting}
+            className="font-washington flex-1 text-2xl bg-red-800 hover:bg-red-700 active:bg-red-900 
+                      text-stone-100 py-4 px-3 rounded font-bold
+                      transition-all duration-300
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      shadow-lg hover:shadow-red-900/50 ml-6"
+          >
+            {deleting ? 'Deleting...' : 'Yes, Delete Forever'}
+          </button>
+
+          <Link
+            to="/characters"
+            className="font-washington flex-1 text-2xl bg-stone-900 hover:bg-stone-800 
+                        text-stone-300 py-4 px-3 rounded text-center no-underline
+                        transition-all duration-300 border-2 border-stone-700 mr-6"
+          >
+            Cancel
+          </Link>
+        </div>
       </div>
-
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-
-      <button 
-        onClick={handleDelete} 
-        disabled={deleting}
-        style={{ backgroundColor: '#dc3545', color: 'white', padding: '10px 20px', marginRight: '10px' }}
-      >
-        {deleting ? 'Deleting...' : 'Yes, Delete Forever'}
-      </button>
-
-      <Link to="/characters">
-        <button style={{ padding: '10px 20px' }}>
-          Cancel
-        </button>
-      </Link>
     </div>
   );
 };

@@ -9,6 +9,7 @@ export const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -37,20 +38,25 @@ export const Register = () => {
 
     try {
       await register(username, password);
-      navigate("/landing");
+
+      setIsAnimatingOut(true);
+
+      setTimeout(() => {
+        navigate("/landing");
+      }, 2000);
+
     } catch (err) {
       setError(err.message || "Registration failed. Please try again.");
-    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div
-      className="min-h-screen flex items-start justify-center bg-cover bg-center bg-no-repeat pt-65 pb-8"
+      className={`min-h-screen flex items-start justify-center bg-black bg-cover bg-center bg-no-repeat pt-65 pb-8 transition-all ${isAnimatingOut ? 'background-pan-up' : ''}`}
       style={{ backgroundImage: `url(${castleBackground})` }}
     >
-  <div className="relative w-full max-w-md mx-4">
+  <div className={`relative w-full max-w-md mx-4 transition-opacity ${isAnimatingOut ? 'fade-out' : ''}`}>
     {/* Title - Absolutely positioned */}
     <div className="mb-8">
       <h1 className="font-washington text-9xl font-bold text-center text-stone-300 mb-2 tracking-wide">

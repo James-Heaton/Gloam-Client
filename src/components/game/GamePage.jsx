@@ -18,41 +18,53 @@ export default function GamePage() {
     }
   }, [isAuthenticated]);
 
-    const handleUseStealthy = () => {
+  const handleUseStealthy = () => {
     handleExecuteAction(null, true);
-    };
+  };
 
   if (loading && !gameState) {
-    return <div className="text-white text-center mt-10">Loading game...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-xl text-stone-300">Loading game...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-red-500 text-center mt-10">Error: {error}</div>;
+    return (
+      <div className="animate-fadeIn flex justify-center items-center min-h-screen">
+        <div className="font-washington text-3xl text-red-700">{error}</div>
+      </div>
+    );
   }
 
   if (!gameState) {
-    return <div className="text-white text-center mt-10">No active game found.</div>;
+    return (
+      <div className="animate-fadeIn flex justify-center items-center min-h-screen">
+        <div className="font-washington text-3xl text-stone-300">No active game found.</div>
+      </div>
+    );
   }
 
-  // Show only game over modal if game is over
-    if (showGameOver) {
-        return (
-            <div className="min-h-screen bg-gray-900 p-6">
-                <GameOverModal />
-            </div>
-        );
-    }
+  if (showGameOver) {
+    return (
+      <div className="flex justify-center items-center min-h-screen p-6">
+        <GameOverModal />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gray-900 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="animate-fadeIn min-h-screen pt-40 pb-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Character Stats - Left Column */}
-          <div className="md:col-span-1">
+          <div className="lg:col-span-1">
             <CharacterStatsPanel character={gameState.character_stats} />
           </div>
 
           {/* Main Game Area - Right Column */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="lg:col-span-3 space-y-6">
             <AreaDisplay area={gameState.area} />
             <ActionList
               actions={gameState.area.actions}
@@ -61,11 +73,11 @@ export default function GamePage() {
             />
             
             {gameState.can_use_stealthy && (
-            <StealthyButton 
+              <StealthyButton 
                 usesRemaining={3 - gameState.character_stats.stealthy_used}
                 onUseStealthy={handleUseStealthy}
                 disabled={loading}
-            />
+              />
             )}
           </div>
         </div>

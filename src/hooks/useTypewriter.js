@@ -1,28 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useTypewriter = (text, speed = 50) => {
-    const [displayText, setDisplayText] = useState('');
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isComplete, setIsComplete] = useState(false);
+  const [displayText, setDisplayText] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
 
-    useEffect(() => {
-        if (currentIndex < text.length) {
-            const timeout = setTimeout(() => {
-                setDisplayText(prev => prev + text[currentIndex]);
-                setCurrentIndex(prev => prev + 1);
-            }, speed);
+  // Reset when text changes
+  useEffect(() => {
+    setDisplayText('');
+    setIsComplete(false);
+  }, [text]);
 
-            return () => clearTimeout(timeout);
-        } else {
-            setIsComplete(true);
-        }
-    }, [currentIndex, text, speed]);
+  useEffect(() => {
+    if (isComplete) return;
 
-    const skip = () => {
-        setDisplayText(text);
-        setCurrentIndex(text.length);
-        setIsComplete(true);
+    if (displayText.length < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(text.slice(0, displayText.length + 1));
+      }, speed);
+
+      return () => clearTimeout(timeout);
+    } else if (displayText.length === text.length) {
+      setIsComplete(true);
     }
+  }, [displayText, text, speed, isComplete]);
 
-    return { displayText, isComplete, skip };
+  const skip = () => {
+    setIsComplete(true);
+    setDisplayText(text);
+  };
+
+  return { displayText, isComplete, skip };
 };

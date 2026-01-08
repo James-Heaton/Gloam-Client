@@ -60,3 +60,8 @@ body {
     opacity: 1;
   }
 }
+
+/* Custom checkbox styling */
+input[type="checkbox"]:checked {
+  accent-color: #b91c1c; /* amber-600 */
+}

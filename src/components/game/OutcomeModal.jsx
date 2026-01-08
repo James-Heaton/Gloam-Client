@@ -9,52 +9,71 @@ export default function OutcomeModal() {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4">
-      <div className="bg-gray-800 text-white p-6 rounded max-w-lg w-full">
-        {/* <h2 className="text-xl font-bold mb-4">Outcome</h2> */}
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+      <div className="bg-black/95 border-4 border-stone-700 rounded-lg p-8 max-w-2xl w-full shadow-2xl">
         
         {/* Lucky feedback BEFORE outcome */}
         {outcomeData.lucky_procced && (
-          <p className="text-yellow-400 mb-4">You feel lucky about your choice...</p>
+          <p className="font-washington text-xl text-amber-500 mb-6 text-center italic">
+            You feel lucky about your choice...
+          </p>
         )}
         
         {/* Main outcome text */}
-        <p className="text-gray-300 mb-4 whitespace-pre-line">
+        <p className="text-xl text-stone-200 mb-6 leading-relaxed whitespace-pre-line text-center">
           {outcomeData.outcome_text}
         </p>
 
         {/* Strong feedback AFTER outcome (if damage was negated) */}
         {outcomeData.strong_procced && (
-          <p className="text-red-400 mb-2">Your strength has absorbed harm.</p>
+          <p className="font-washington text-xl text-red-400 mb-6 text-center italic">
+            Your strength has absorbed some harm.
+          </p>
         )}
         
         {/* Wise feedback AFTER outcome (if MP cost was negated) */}
         {outcomeData.wise_procced && (
-          <p className="text-blue-400 mb-2">Your wisdom has reduced the cost of magic.</p>
+          <p className="font-washington text-xl text-blue-400 mb-6 text-center italic">
+            Your wisdom has reduced the cost of magic.
+          </p>
         )}
 
         {/* Stat Changes */}
-        <div className="mb-4 space-y-1">
-          {outcomeData.stat_changes.hp !== 0 && (
-            <p className={outcomeData.stat_changes.hp > 0 ? 'text-green-400' : 'text-red-400'}>
-              HP: {outcomeData.stat_changes.hp > 0 ? '+' : ''}{outcomeData.stat_changes.hp}
-            </p>
-          )}
-          {outcomeData.stat_changes.mp !== 0 && (
-            <p className={outcomeData.stat_changes.mp > 0 ? 'text-blue-400' : 'text-blue-300'}>
-              MP: {outcomeData.stat_changes.mp > 0 ? '+' : ''}{outcomeData.stat_changes.mp}
-            </p>
-          )}
-          {outcomeData.stat_changes.gp !== 0 && (
-            <p className="text-yellow-400">
-              GP: {outcomeData.stat_changes.gp > 0 ? '+' : ''}{outcomeData.stat_changes.gp}
-            </p>
-          )}
-        </div>
+        {(outcomeData.stat_changes.hp !== 0 || outcomeData.stat_changes.mp !== 0 || outcomeData.stat_changes.gp !== 0) && (
+          <div className="bg-stone-900/60 border-2 border-stone-700 rounded-lg p-4 mb-6">
+            <div className="space-y-2">
+              {outcomeData.stat_changes.hp !== 0 && (
+                <div className="flex justify-between items-center">
+                  <span className="font-washington text-stone-400 text-2xl">Health:</span>
+                  <span className={`text-xl font-bold ${outcomeData.stat_changes.hp > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    {outcomeData.stat_changes.hp > 0 ? '+' : ''}{outcomeData.stat_changes.hp} HP
+                  </span>
+                </div>
+              )}
+              {outcomeData.stat_changes.mp !== 0 && (
+                <div className="flex justify-between items-center">
+                  <span className="font-washington text-stone-400 text-2xl">Magic:</span>
+                  <span className={`text-xl font-bold ${outcomeData.stat_changes.mp > 0 ? 'text-blue-400' : 'text-blue-300'}`}>
+                    {outcomeData.stat_changes.mp > 0 ? '+' : ''}{outcomeData.stat_changes.mp} MP
+                  </span>
+                </div>
+              )}
+              {outcomeData.stat_changes.gp !== 0 && (
+                <div className="flex justify-between items-center">
+                  <span className="font-washington text-stone-400 text-2xl">Gold:</span>
+                  <span className="text-xl font-bold text-amber-500">
+                    {outcomeData.stat_changes.gp > 0 ? '+' : ''}{outcomeData.stat_changes.gp} GP
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         <button
           onClick={handleContinue}
-          className="w-full bg-gray-600 hover:bg-gray-500 text-white py-2 rounded"
+          className="font-washington w-full text-2xl bg-stone-700 hover:bg-red-800 text-stone-100 py-4 rounded 
+                    transition-all duration-300 shadow-lg hover:shadow-red-900/50"
         >
           Continue
         </button>

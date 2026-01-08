@@ -24,11 +24,11 @@ const AppContent = () => {
   const showNavbar = isAuthenticated && location.pathname !== '/' && location.pathname !== '/register';
 
   // Check if we're on a page that should fade in
-  const shouldFadeIn = location.pathname === '/landing' || location.pathname === '/about' || location.pathname === '/rules';
+  const shouldFadeIn = location.pathname === '/landing';
 
   return (
     <div
-      className={`min-h-screen bg-cover bg-center bg-fixed overflow-hidden ${shouldFadeIn ? 'animate-fadeIn' : ''}`}
+      className={`min-h-screen bg-cover bg-center bg-fixed ${shouldFadeIn ? 'animate-fadeIn' : ''}`}
       style={{ 
         backgroundImage: `url(${backgroundImage})`,
         backgroundPosition: 'center calc(0% + 4rem)'

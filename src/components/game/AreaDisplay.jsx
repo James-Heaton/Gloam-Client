@@ -1,15 +1,29 @@
+import { useTypewriter } from '../../hooks/useTypewriter';
+
 export default function AreaDisplay({ area }) {
+  const { displayText, isComplete, skip } = useTypewriter(area.description, 30);
+
   return (
-    <div className="bg-gray-900 text-white p-6 rounded">
-      {/* <div className="mb-2">
-        <span className="text-sm text-gray-400">Area {area.area_number}</span>
-      </div> */}
+    <div 
+      key={area.area_number}
+      className="bg-black/50 border-4 border-stone-700 rounded-lg p-8 shadow-2xl"
+      onClick={!isComplete ? skip : undefined}
+    >
+      <h2 className="font-washington text-4xl font-bold text-stone-300 mb-6 text-center">
+        {area.name}
+      </h2>
       
-      <h2 className="text-2xl font-bold mb-4">{area.name}</h2>
-      
-      <p className="text-gray-300 leading-relaxed whitespace-pre-line">
-        {area.description}
-      </p>
+      <div className="relative">
+        {/* Invisible text to reserve space */}
+        <p className="invisible text-xl text-stone-300 leading-relaxed whitespace-pre-line">
+          {area.description}
+        </p>
+        
+        {/* Visible typed text */}
+        <p className="absolute inset-0 text-xl text-stone-300 leading-relaxed whitespace-pre-line">
+          {displayText}
+        </p>
+      </div>
     </div>
   );
 }

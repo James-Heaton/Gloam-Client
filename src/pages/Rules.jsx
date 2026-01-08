@@ -1,33 +1,34 @@
-import { useTypewriter } from "../hooks/useTypewriter";
-
 export const Rules = () => {
-  const fullText = `Gloam: The Winding Path is a game of adventure, exploration, risk, and reward. You must weigh the risk of an action against what you hope to gain.
-
-Your goal is to survive... and acquire as much treasure as possible.
-
-Once you enter an area, the way back locks behind you. You can only go forward. 
-
-Risky Actions will result in a Complete Success, Mixed Success, or Complete Failure. This is determined by a hidden 2D6 dice roll.
-
-Being Lucky is helpful, but it does not always guarantee a success.
-
-If you wish to edit a Character, that Character’s game progress will be reset.
-
-If you wish to skip the animated text, simply click to do so.`;
-
-  const { displayText, isComplete, skip } = useTypewriter(fullText, 20);
-
   return (
     <div
-      className="animate-fadeIn flex flex-col items-center justify-center pt-30 pb-8"
-      onClick={!isComplete ? skip : undefined}
+      className="animate-fadeIn flex flex-col items-center justify-center pt-40 pb-8"
     >
-    <h1 className="font-washington text-4xl text-red-800 mb-10">Rules</h1>
-      <div className="font-washington max-w-168 ml-15 mr-15 text-2xl text-justify leading-10 text-stone-300 relative mb-5">
-        <div className="invisible whitespace-pre-wrap">{fullText}</div>
-        <div className="absolute inset-0 whitespace-pre-wrap">
-          {displayText}
-        </div>
+    <h1 className="font-washington text-5xl text-stone-300 mb-10">Rules</h1>
+      <div className="max-w-156 ml-15 mr-15 text-xl text-justify leading-9 text-stone-300 relative mb-5">
+        <p className="mb-8">
+          Gloam: The Winding Path is a game of adventure, exploration, risk, and reward. You must weigh the risk of an action against what you hope to gain.
+        </p>
+        <p className="mb-8">
+          Your goal is to survive... and acquire as much treasure (GP) as possible.
+        </p>
+        <p className="mb-8">
+          Once you enter an Area, the way back locks behind you. You can only go forward. 
+        </p>
+        <p className="mb-8">
+          Your Actions may result in a Success, Mixed Success, or Failure. The outcome is determined by a hidden 2D6 dice roll. Each Action leads to a different Area.
+        </p>
+        <p className="mb-8">
+          Being Lucky is helpful, but it does not always guarantee a success.
+        </p>
+        <p className="mb-8">
+          HP and MP are very important. If you reach 0 HP, you will die. If you reach 0 MP, you can no longer use Magic.
+        </p>
+        <p className="mb-8">
+          If you wish to edit a Character, that Character’s game progress will be reset.
+        </p>
+        <p className="mb-8">
+          If you wish to skip the animated text, simply *click* the text to do so.
+        </p>
       </div>
     </div>
   );    

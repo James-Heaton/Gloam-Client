@@ -84,7 +84,7 @@ export const NewAdventurer = () => {
           New Character
         </h1>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} autoComplete="off" className="space-y-6">
           {/* Character Name */}
           <div>
             <label 

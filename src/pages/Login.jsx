@@ -62,7 +62,7 @@ export const Login = () => {
             Sign In
           </h2> */}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">
             {/* Username field */}
             <div>
               <label

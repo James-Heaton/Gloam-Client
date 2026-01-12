@@ -72,9 +72,15 @@ export const Navbar = () => {
           >
             About
           </Link>
-          <button
+          {/* <button
             onClick={handleLogout}
             className="font-washington bg-stone-700 hover:bg-red-800 text-stone-100 border-none py-2 px-4 rounded cursor-pointer text-xl transition-all duration-400 max-lg:w-full max-lg:text-center shadow-md hover:shadow-red-900/50"
+          >
+            Sign Out
+          </button> */}
+                    <button
+            onClick={handleLogout}
+            className="font-washington text-stone-300 hover:text-red-800 no-underline text-2xl transition-colors duration-400 max-lg:w-full max-lg:text-right"
           >
             Sign Out
           </button>

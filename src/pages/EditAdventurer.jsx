@@ -95,7 +95,7 @@ export const EditAdventurer = () => {
           Edit Character
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} autoComplete="off" className="space-y-6">
           {/* Character Name (Read-only) */}
           <div>
             <span className="font-washington text-3xl text-stone-100 px-0 py-3">

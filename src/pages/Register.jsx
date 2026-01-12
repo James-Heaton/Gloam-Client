@@ -66,7 +66,7 @@ export const Register = () => {
         The Winding Path
       </p>
     </div>
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">
           <div>
             <label
               htmlFor="username"
